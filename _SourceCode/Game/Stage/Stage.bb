@@ -28,7 +28,7 @@
 ;
 ; The BlitzSonic Team:
 ; - HÈctor "Damizean" (elgigantedeyeso at gmail dot com)
-; - Mark "CorÅE (mabc_bh at yahoo dot com dot br)
+; - Mark "CoròE (mabc_bh at yahoo dot com dot br)
 ; - Streak Thunderstorm
 ; - Mista ED
 ;
@@ -327,7 +327,7 @@
 										; Update progress bar
 										Game_Stage_UpdateProgressBar("Loading object n."+j+": Player", Float#(j)/Float#(xmlNodeChildCount(RootChildNode)))
 										
-										p.tPlayer = Player_Create(CHARACTER_SONIC)
+										p.tPlayer = Player_Create(SelectedCharacter)
 										Camera_Bind(camera, p)
 										
 										; Setup position, rotation and scale.

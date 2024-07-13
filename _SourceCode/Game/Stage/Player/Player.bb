@@ -28,7 +28,7 @@
 ;
 ; The BlitzSonic Team:
 ; - HÈctor "Damizean" (elgigantedeyeso at gmail dot com)
-; - Mark "CorÅE (mabc_bh at yahoo dot com dot br)
+; - Mark "CoròE (mabc_bh at yahoo dot com dot br)
 ; - Streak Thunderstorm
 ; - Mista ED
 ;
@@ -151,6 +151,7 @@
 	Const CHARACTER_SONIC			= 0
 	Const CHARACTER_TAILS			= 1
 	Const CHARACTER_KNUCKLES		= 2
+	Const CHARACTER_AMY				= 3
 	
 	; Action constants
 	Const ACTION_COMMON				= 0
@@ -214,8 +215,16 @@
 		p\Character = Character
 		Select p\Character
 			Case CHARACTER_SONIC
+				p\Objects\Mesh 			= CopyEntity( Mesh_Sonic , Game\Stage\Root)
+			Case CHARACTER_TAILS
+				p\Objects\Mesh 			= CopyEntity( Mesh_Tails , Game\Stage\Root)
+			Case CHARACTER_KNUCKLES
+				p\Objects\Mesh 			= CopyEntity( Mesh_Knuckles , Game\Stage\Root)
+			Case CHARACTER_AMY
+				p\Objects\Mesh 			= CopyEntity( Mesh_Amy , Game\Stage\Root)
+			Default
 				; Load mesh
-				p\Objects\Mesh 			= CopyEntity(Mesh_Sonic, Game\Stage\Root)
+				p\Objects\Mesh 			= CopyEntity( Mesh_Sonic , Game\Stage\Root)
 				;ScaleEntity(p\Objects\Mesh, GAME_SCALE#, GAME_SCALE#, GAME_SCALE#)
 
 				;p\Objects\Mesh_Balance	= FindChild(p\Objects\Mesh, "Bone01")
@@ -224,15 +233,12 @@
 				;p\Objects\Mesh_Torso 	= FindChild(p\Objects\Mesh, "Torso")
 				;p\Objects\Mesh_Legs 	= FindChild(p\Objects\Mesh, "Legs")
 
+
+		End Select
 				p\Objects\Mesh_Spindash = CopyEntity(Mesh_Sonic_Spindash, Game\Stage\Root)
 				p\Objects\Mesh_JumpBall = CopyEntity(Mesh_Sonic_JumpBall, p\Objects\Mesh)
 				ScaleEntity(p\Objects\Mesh_Spindash, GAME_SCALE#, GAME_SCALE#, GAME_SCALE#)
 				HideEntity p\Objects\Mesh_Spindash
-
-			Case CHARACTER_TAILS
-			Case CHARACTER_KNUCKLES
-		End Select
-
 		; Create shadow quad
 		p\Objects\Shadow = CreateQuad(4, 4, 2, 2, Game\Stage\Root)
 		EntityTexture(p\Objects\Shadow, Textures_Shadow)

@@ -28,7 +28,7 @@
 ;
 ; The BlitzSonic Team:
 ; - HÈctor "Damizean" (elgigantedeyeso at gmail dot com)
-; - Mark "CorÅE (mabc_bh at yahoo dot com dot br)
+; - Mark "CoròE (mabc_bh at yahoo dot com dot br)
 ; - Streak Thunderstorm
 ; - Mista ED
 ;
@@ -55,24 +55,41 @@
 ; /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 ;   VARIABLES
 ; /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/	
-
+	Dim SELECTEDCHARACTERNAME$(4)
+	SELECTEDCHARACTERNAME(1)="Sonic"
+	SELECTEDCHARACTERNAME(2)="Tails"
+	SELECTEDCHARACTERNAME(3)="Knuckles"
+	SELECTEDCHARACTERNAME(4)="Amy"
 	; ---- Meshes ----
-	Global Mesh_Sonic					= LoadAnimMesh("Characters/Sonic/Sonic.b3d")
-	RecursiveExtractAnimSeq(Mesh_Sonic,	0,		100)	; Idle
-	RecursiveExtractAnimSeq(Mesh_Sonic,	101,	140)	; Walk
-	RecursiveExtractAnimSeq(Mesh_Sonic,	141,	180)	; Jog
-	RecursiveExtractAnimSeq(Mesh_Sonic, 181,	220)	; Run
-	RecursiveExtractAnimSeq(Mesh_Sonic,	221,	260)	; Sprint
-	RecursiveExtractAnimSeq(Mesh_Sonic,	261,	276)	; Spin
-	RecursiveExtractAnimSeq(Mesh_Sonic,	277,	290)	; Fall
-	RecursiveExtractAnimSeq(Mesh_Sonic,	291,	304)	; Rise
+	Global Mesh_Sonic					= LoadAnimMesh("Characters/"+SELECTEDCHARACTERNAME$(1)+"/Sonic.b3d")
+	ExtractCharacterSeq(Mesh_Sonic)
 	HideEntity(Mesh_Sonic)
+	Global Mesh_Tails					= LoadAnimMesh("Characters/"+SELECTEDCHARACTERNAME$(2)+"/Sonic.b3d")
+	ExtractCharacterSeq(Mesh_Tails)
+	HideEntity(Mesh_Tails)
+	Global Mesh_Knuckles					= LoadAnimMesh("Characters/"+SELECTEDCHARACTERNAME$(3)+"/Sonic.b3d")
+	ExtractCharacterSeq(Mesh_Knuckles)
+	HideEntity(Mesh_Knuckles)
+	Global Mesh_Amy					= LoadAnimMesh("Characters/"+SELECTEDCHARACTERNAME$(4)+"/Sonic.b3d")
+	ExtractCharacterSeq(Mesh_Amy)
+	HideEntity(Mesh_Amy)
 	
 	Global Mesh_Sonic_Spindash			= LoadAnimMesh("Characters/Sonic/Spindash.b3d")
 	HideEntity(Mesh_Sonic_Spindash)
 
 	Global Mesh_Sonic_JumpBall			= LoadAnimMesh("Characters/Sonic/Jump.b3d")
 	HideEntity(Mesh_Sonic_JumpBall)
+
+	Function ExtractCharacterSeq(mesh)
+		RecursiveExtractAnimSeq(mesh,	0,		100)	; Idle
+		RecursiveExtractAnimSeq(mesh,	101,	140)	; Walk
+		RecursiveExtractAnimSeq(mesh,	141,	180)	; Jog
+		RecursiveExtractAnimSeq(mesh, 181,	220)	; Run
+		RecursiveExtractAnimSeq(mesh,	221,	260)	; Sprint
+		RecursiveExtractAnimSeq(mesh,	261,	276)	; Spin
+		RecursiveExtractAnimSeq(mesh,	277,	290)	; Fall
+		RecursiveExtractAnimSeq(mesh,	291,	304)	; Rise
+	End Function
 
 ;~IDEal Editor Parameters:
 ;~C#Blitz3D

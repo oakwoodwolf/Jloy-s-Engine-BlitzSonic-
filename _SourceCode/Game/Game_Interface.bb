@@ -28,7 +28,7 @@
 ;
 ; The BlitzSonic Team:
 ; - HÈctor "Damizean" (elgigantedeyeso at gmail dot com)
-; - Mark "CorÅE (mabc_bh at yahoo dot com dot br)
+; - Mark "CoròE (mabc_bh at yahoo dot com dot br)
 ; - Streak Thunderstorm
 ; - Mista ED
 ;
@@ -69,7 +69,7 @@
 
 			; Render Score/Time/Rings image
 			DrawImageEx(Interface_ScoreTimeRings, 32*GAME_WINDOW_SCALE#, 32*GAME_WINDOW_SCALE#)
-			DrawImageEx(Interface_Icons, 32*GAME_WINDOW_SCALE#, GAME_WINDOW_H-85.0*GAME_WINDOW_SCALE#)
+			DrawImageEx(Interface_Icons, 32*GAME_WINDOW_SCALE#, GAME_WINDOW_H-85.0*GAME_WINDOW_SCALE#,SelectedCharacter)
 			
 			; Render numbers
 			Interface_Number(Game\Gameplay\Score, 				320*GAME_WINDOW_SCALE#, 30*GAME_WINDOW_SCALE#,		0, 1)

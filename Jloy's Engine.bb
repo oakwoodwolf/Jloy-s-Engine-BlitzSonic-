@@ -28,7 +28,7 @@
 ;
 ; The BlitzSonic Team:
 ; - HÈctor "Damizean" (elgigantedeyeso at gmail dot com)
-; - Mark "CorÅE (mabc_bh at yahoo dot com dot br)
+; - Mark "CoròE (mabc_bh at yahoo dot com dot br)
 ; - Streak Thunderstorm
 ; - Mista ED
 ;
@@ -128,6 +128,7 @@ Global StageIDCounter = 0
 
 Global SelectedStage$
 Global SelectedCharacter
+
 
 ; Different menu screens
 Const MENU_INTRO		= -1
@@ -249,7 +250,8 @@ ScaleImage(IntroLogo, 2, 2)
 	; =========================================================================================================
 	; Menu_MenuTitle
 	; =========================================================================================================
-	Function Menu_MenuTitle()		; Clear the screen
+	Function Menu_MenuTitle()
+		; Clear the screen
 		Cls()
 		
 		; Draw the background first
@@ -322,7 +324,7 @@ ScaleImage(IntroLogo, 2, 2)
 	; =========================================================================================================
 	Function Menu_CharacterSelect()
 		; Set the max position of this menu
-		menuMaxPos = 2
+		menuMaxPos = 3
 		
 		; Listen for the input
 		PerformMenuInput(1)
@@ -337,24 +339,20 @@ ScaleImage(IntroLogo, 2, 2)
 		RenderMenuText(GAME_WINDOW_W/2, 4, "Select a character", True)
 		Select (menuPosition)
 			Case 0
-				RenderMenuText(GAME_WINDOW_W/2, GAME_WINDOW_H-40, "Sonic", True)
+				RenderMenuText(GAME_WINDOW_W/2, GAME_WINDOW_H-40, SELECTEDCHARACTERNAME(menuPosition+1), True)
 			Case 1
-				RenderMenuText(GAME_WINDOW_W/2, GAME_WINDOW_H-40, "Amy", True)
+				RenderMenuText(GAME_WINDOW_W/2, GAME_WINDOW_H-40, SELECTEDCHARACTERNAME(menuPosition+1), True)
 			Case 2
-				RenderMenuText(GAME_WINDOW_W/2, GAME_WINDOW_H-40, "Tails", True)
+				RenderMenuText(GAME_WINDOW_W/2, GAME_WINDOW_H-40, SELECTEDCHARACTERNAME(menuPosition+1), True)
+			Case 3
+				RenderMenuText(GAME_WINDOW_W/2, GAME_WINDOW_H-40, SELECTEDCHARACTERNAME(menuPosition+1), True)
 		End Select	
 		
 		; Listen for the selection
 		If (KeyHit(KEY_ENTER)) Then 
-			Select (menuPosition)
-				Case 0 ;Sonic
-					SelectedCharacter = CHARACTER_SONIC
-					LoadStageList()
-				Case 1 ; Amy
-					PlaySound(Sound_Ring)
-				Case 2 ; Tails
-					PlaySound(Sound_Ring)
-			End Select
+			SelectedCharacter = menuPosition
+			LoadStageList()
+			
 		End If
 		
 		; Flip the buffer
