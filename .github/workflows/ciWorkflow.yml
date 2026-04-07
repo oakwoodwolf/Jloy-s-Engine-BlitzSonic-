@@ -10,7 +10,7 @@ jobs:
           contents: write
     steps:
       - uses: actions/checkout@v4
-      - uses: oakwoodwolf/actions-blitzcc@b3d1106
+      - uses: oakwoodwolf/actions-blitzcc@main
         with:
           source: "Jloy's Engine.bb"
           output: "build"
