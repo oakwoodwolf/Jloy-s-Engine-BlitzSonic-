@@ -1,0 +1,57 @@
+name: Blitz3d - CI Workflow
+on:
+  push:
+    branches: ['*']
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+    permissions:
+          contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oakwoodwolf/actions-blitzcc@b3d1106
+        with:
+          source: "Jloy's Engine.bb"
+          output: "build"
+          name: "Jloys Engine"
+          userlib_path: "_Dependencies"
+        
+      - name: Zip Build Folder
+        shell: pwsh
+        run: |
+          Write-Host "Packing extras into build folder..."
+          $dllFiles = Get-ChildItem -Path "${{env.GITHUB_WORKSPACE}}" -Filter *.dll -File
+          if ($dllFiles.Count -gt 0) {
+              Write-Host "Copying DLLs: $($dllFiles.Name -join ', ')"
+              foreach ($file in $dllFiles) {
+                  Copy-Item $file.FullName -Destination "build" -Force
+              }
+          }
+          Copy-Item Characters "build/Characters" -Recurse -Force
+          Copy-Item Interface "build/Interface" -Recurse -Force
+          Copy-Item Music "build/Music" -Recurse -Force
+          Copy-Item Objects "build/Objects" -Recurse -Force
+          Copy-Item Sounds "build/Sounds" -Recurse -Force
+          Copy-Item Stages "build/Stages" -Recurse -Force
+          Copy-Item Textures "build/Textures" -Recurse -Force
+          Write-Host "Archiving build folder..."
+          Compress-Archive -Path build/* -DestinationPath "JloyEngine.zip"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: JloyEngine
+          path: build/
+      - name: Add tag
+        shell: pwsh
+        run: |
+          git tag -a latest ${{env.GITHUB_SHA}}
+      - name: Create Release
+        id: release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          files: "Jloys Engine.zip"
+          generate_release_notes: true
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
